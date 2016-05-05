@@ -1,0 +1,44 @@
+<div class="container" >
+
+  <div class="search-container" >
+    <div class="filter-conatiner row">
+     <div class="col-lg-6">
+        <div class="input-group">
+          <input autofocus type="text" class="form-control"  ng-model="$ctrl.searchTerm" placeholder="Search for...">
+          <span class="input-group-btn">
+            <button class="btn btn-info" ng-disabled="!$ctrl.searchTerm" type="button"  ng-click="$ctrl.searchTracks($ctrl.searchTerm)"> Go!</button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="filter-results-conatiner row">
+      <div class="col-lg-8">
+        <div class="error-msg" ng-if="$ctrl.isError" ng-bind="$ctrl.errorMsg"></div>
+        <ul class="result-list">
+          <li ng-repeat="trackData in $ctrl.tracks track by trackData.id" class="track">
+            <span ng-click="$ctrl.setSelectedTrack(trackData)"  class="track-title" >{{trackData.title}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="search-actions-container" >
+      <div ng-if="$ctrl.tracks.length" ng-click="$ctrl.nextTracks()" title="view next tracks" class="arrow-right"> </div>
+    </div>
+  </div>
+
+  <div class="result-image-container" ng-click="$ctrl.play($ctrl.selectedTrack.id)" ng-if="$ctrl.selectedTrack" >
+    <img class="image-track" ng-src="{{$ctrl.selectedTrack.artwork_url}}" />
+  </div>
+
+  <div class="history-search-container row" ng-if="$ctrl.searchHistoryItems.length">
+    <div class="col-lg-8">
+      <h2 class="history-search-title">recent searches</h2>
+      <ul class="history-search-list" >
+        <li ng-repeat="item in $ctrl.searchHistoryItems" class="history-search-item">
+          <span  class="history-search-item-title" >{{item}}</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>
